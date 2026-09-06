@@ -1,0 +1,153 @@
+/*
+ * Design tokens. Every colour, radius and shadow in the app comes from here,
+ * so a theme change is a change to this file and nothing else.
+ */
+:root {
+  color-scheme: light;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, system-ui, 'Helvetica Neue', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+
+  /* Surfaces */
+  --bg: #f7f7f9;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f2f2f5;
+  --surface-hover: #ededf1;
+  --surface-sunken: #eeeef2;
+  --overlay: rgba(16, 18, 24, 0.42);
+
+  /* Lines */
+  --border: rgba(14, 16, 24, 0.09);
+  --border-strong: rgba(14, 16, 24, 0.16);
+  --border-focus: var(--accent);
+
+  /* Text */
+  --text: #14161c;
+  --text-muted: #5c6070;
+  --text-subtle: #8b8f9e;
+  --text-inverse: #ffffff;
+
+  /* Brand */
+  --accent: #5a5ae0;
+  --accent-hover: #4b4bd4;
+  --accent-active: #4040c4;
+  --accent-fg: #ffffff;
+  --accent-soft: rgba(90, 90, 224, 0.1);
+  --accent-soft-hover: rgba(90, 90, 224, 0.16);
+  --accent-ring: rgba(90, 90, 224, 0.35);
+
+  /* Feedback */
+  --success: #1f9254;
+  --success-soft: rgba(31, 146, 84, 0.12);
+  --warning: #b26b00;
+  --warning-soft: rgba(178, 107, 0, 0.12);
+  --danger: #c8322f;
+  --danger-soft: rgba(200, 50, 47, 0.1);
+  --danger-hover: #ab2926;
+
+  /* Pipeline status colours: text + soft background pairs */
+  --status-saved: #64748b;          --status-saved-soft: rgba(100, 116, 139, 0.13);
+  --status-applied: #2563eb;        --status-applied-soft: rgba(37, 99, 235, 0.12);
+  --status-screening: #0d8f9e;      --status-screening-soft: rgba(13, 143, 158, 0.13);
+  --status-interviewing: #7c3aed;   --status-interviewing-soft: rgba(124, 58, 237, 0.12);
+  --status-offer: #b26b00;          --status-offer-soft: rgba(178, 107, 0, 0.14);
+  --status-accepted: #1f9254;       --status-accepted-soft: rgba(31, 146, 84, 0.14);
+  --status-rejected: #c8322f;       --status-rejected-soft: rgba(200, 50, 47, 0.1);
+  --status-withdrawn: #78716c;      --status-withdrawn-soft: rgba(120, 113, 108, 0.12);
+
+  /* Chart series - readable on both themes */
+  --chart-1: #5a5ae0;
+  --chart-2: #0d8f9e;
+  --chart-3: #b26b00;
+  --chart-4: #c8459b;
+  --chart-5: #1f9254;
+  --chart-grid: rgba(14, 16, 24, 0.08);
+
+  /* Radii */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 11px;
+  --radius-lg: 15px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  /* Elevation */
+  --shadow-xs: 0 1px 2px rgba(16, 18, 26, 0.06);
+  --shadow-sm: 0 1px 2px rgba(16, 18, 26, 0.06), 0 2px 6px rgba(16, 18, 26, 0.05);
+  --shadow-md: 0 4px 12px rgba(16, 18, 26, 0.08), 0 1px 3px rgba(16, 18, 26, 0.05);
+  --shadow-lg: 0 16px 40px rgba(16, 18, 26, 0.14), 0 2px 8px rgba(16, 18, 26, 0.06);
+  --shadow-pop: 0 24px 60px rgba(16, 18, 26, 0.2);
+
+  /* Rhythm */
+  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
+  --space-5: 20px;  --space-6: 24px;  --space-8: 32px;  --space-10: 40px;
+  --space-12: 48px; --space-16: 64px;
+
+  --sidebar-width: 236px;
+  --topbar-height: 60px;
+  --tabbar-height: 60px;
+  --content-max: 1220px;
+
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --duration-fast: 120ms;
+  --duration: 200ms;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0b0d11;
+  --bg-elevated: #141820;
+  --surface: #141820;
+  --surface-2: #1b2029;
+  --surface-hover: #222833;
+  --surface-sunken: #0f1218;
+  --overlay: rgba(3, 5, 9, 0.66);
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  --text: #eceef3;
+  --text-muted: #9aa1b1;
+  --text-subtle: #6b7383;
+  --text-inverse: #0b0d11;
+
+  --accent: #7b7bf0;
+  --accent-hover: #8c8cf5;
+  --accent-active: #6b6be6;
+  --accent-fg: #0b0d11;
+  --accent-soft: rgba(123, 123, 240, 0.16);
+  --accent-soft-hover: rgba(123, 123, 240, 0.24);
+  --accent-ring: rgba(123, 123, 240, 0.45);
+
+  --success: #4ade80;
+  --success-soft: rgba(74, 222, 128, 0.15);
+  --warning: #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.15);
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.15);
+  --danger-hover: #fca5a5;
+
+  --status-saved: #94a3b8;          --status-saved-soft: rgba(148, 163, 184, 0.16);
+  --status-applied: #7aa5ff;        --status-applied-soft: rgba(122, 165, 255, 0.16);
+  --status-screening: #4dd0dd;      --status-screening-soft: rgba(77, 208, 221, 0.15);
+  --status-interviewing: #b48bff;   --status-interviewing-soft: rgba(180, 139, 255, 0.17);
+  --status-offer: #fbbf24;          --status-offer-soft: rgba(251, 191, 36, 0.16);
+  --status-accepted: #4ade80;       --status-accepted-soft: rgba(74, 222, 128, 0.16);
+  --status-rejected: #f87171;       --status-rejected-soft: rgba(248, 113, 113, 0.15);
+  --status-withdrawn: #a8a29e;      --status-withdrawn-soft: rgba(168, 162, 158, 0.15);
+
+  --chart-1: #7b7bf0;
+  --chart-2: #25a5b5;
+  --chart-3: #fbbf24;
+  --chart-4: #f472b6;
+  --chart-5: #4ade80;
+  --chart-grid: rgba(255, 255, 255, 0.07);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 18px 44px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-pop: 0 28px 70px rgba(0, 0, 0, 0.7);
+}

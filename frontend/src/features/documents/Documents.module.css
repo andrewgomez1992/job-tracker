@@ -1,0 +1,67 @@
+.page {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  gap: var(--space-3);
+}
+
+.doc { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); }
+.docHead { display: flex; align-items: flex-start; gap: var(--space-3); }
+.docIcon {
+  display: grid; place-items: center;
+  flex: none;
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--accent);
+  grid-template-columns: minmax(0, 1fr);
+}
+.docText { flex: 1; min-width: 0; }
+.docTitle { font-size: 0.9063rem; font-weight: 570; letter-spacing: -0.008em; }
+.docMeta { margin-top: 2px; font-size: 0.7813rem; color: var(--text-muted); }
+.docNotes {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.docFooter {
+  display: flex; align-items: center; gap: var(--space-2);
+  margin-top: auto; padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+}
+.docActions { margin-left: auto; display: flex; gap: 2px; }
+
+.dropzone {
+  display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+  width: 100%; padding: var(--space-5);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  transition: border-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+.dropzone:hover { border-color: var(--accent); color: var(--accent); }
+
+.filePicked {
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  font-size: 0.8438rem;
+}
+.fileName { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fileSize { color: var(--text-subtle); font-size: 0.75rem; }
+.fileRemove {
+  border: none; background: none; color: var(--text-subtle);
+  padding: 2px; border-radius: var(--radius-xs); display: grid; place-items: center;
+  grid-template-columns: minmax(0, 1fr);
+}
+.fileRemove:hover { color: var(--danger); background: var(--danger-soft); }

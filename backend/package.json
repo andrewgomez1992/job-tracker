@@ -1,0 +1,29 @@
+{
+  "name": "job-tracker-backend",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "migrate": "node -e \"import('./src/db/migrate.js').then(m=>m.runMigrations())\"",
+    "seed": "node src/db/seed.js",
+    "db:reset": "node -e \"require('fs').rmSync('data',{recursive:true,force:true})\" && npm run seed",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "REST API for the job tracker: Express 5 + SQLite.",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "multer": "^2.3.0",
+    "zod": "^4.5.4"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

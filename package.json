@@ -1,0 +1,23 @@
+{
+  "name": "job-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Trail — a personal job application tracker. React frontend, Express + SQLite API.",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "workspaces": ["backend", "frontend"],
+  "scripts": {
+    "setup": "npm install && npm run seed",
+    "dev": "concurrently -n api,web -c magenta,cyan \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm --prefix backend run dev",
+    "dev:web": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix backend start",
+    "seed": "npm --prefix backend run seed",
+    "smoke": "npm --prefix backend run smoke",
+    "db:reset": "npm --prefix backend run db:reset"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

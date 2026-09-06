@@ -1,0 +1,23 @@
+.toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+}
+.option {
+  display: grid;
+  place-items: center;
+  width: 26px; height: 24px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-subtle);
+  transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+  grid-template-columns: minmax(0, 1fr);
+}
+.option:hover { color: var(--text); }
+.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-xs); }

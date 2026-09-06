@@ -1,0 +1,60 @@
+.field { display: grid; gap: 6px; grid-template-columns: minmax(0, 1fr); }
+.label {
+  font-size: 0.8125rem;
+  font-weight: 550;
+  color: var(--text-muted);
+  letter-spacing: -0.004em;
+}
+.optional { margin-left: 5px; font-weight: 450; color: var(--text-subtle); }
+
+.control {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 11px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-size: 0.9063rem;
+  transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
+  appearance: none;
+}
+.control::placeholder { color: var(--text-subtle); }
+.control:hover:not(:disabled):not(:focus) { border-color: var(--border-strong); }
+.control:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+.control:disabled { background: var(--surface-2); color: var(--text-subtle); cursor: not-allowed; }
+.textarea { min-height: 88px; resize: vertical; line-height: 1.55; }
+.invalid { border-color: var(--danger); }
+.invalid:focus { border-color: var(--danger); box-shadow: 0 0 0 3px var(--danger-soft); }
+
+.selectWrap { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); }
+.select { padding-right: 32px; cursor: pointer; }
+.chevron {
+  position: absolute; right: 11px; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; color: var(--text-subtle);
+}
+
+.hint { font-size: 0.75rem; color: var(--text-subtle); }
+.error { font-size: 0.75rem; color: var(--danger); }
+
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+@media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.chip {
+  padding: 3px 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all var(--duration-fast) var(--ease);
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.chipActive { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }

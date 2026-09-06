@@ -1,0 +1,83 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: var(--overlay);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fade-in var(--duration) var(--ease);
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--modal-width, 560px);
+  max-height: min(88vh, 860px);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-pop);
+  animation: pop-in var(--duration) var(--ease);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+.title { font-size: 1.0625rem; font-weight: 620; letter-spacing: -0.018em; }
+.description { margin-top: 3px; font-size: 0.8438rem; color: var(--text-muted); }
+.close {
+  flex: none;
+  display: grid; place-items: center;
+  width: 30px; height: 30px;
+  border: none; border-radius: var(--radius-sm);
+  background: transparent; color: var(--text-subtle);
+  transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+  grid-template-columns: minmax(0, 1fr);
+}
+.close:hover { background: var(--surface-hover); color: var(--text); }
+
+.body { padding: var(--space-5); overflow-y: auto; flex: 1; }
+.bodyFlush { padding: 0; overflow-y: auto; flex: 1; }
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border);
+  background: var(--surface-sunken);
+}
+.footerSpread { justify-content: space-between; }
+
+/* On phones a modal becomes a bottom sheet you can reach with a thumb. */
+@media (max-width: 640px) {
+  .backdrop { align-items: flex-end; padding: 0; }
+  .panel {
+    max-width: none;
+    max-height: 92vh;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    border-bottom: none;
+    animation: slide-up var(--duration) var(--ease);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .grabber {
+    position: absolute; top: 8px; left: 50%;
+    width: 36px; height: 4px; margin-left: -18px;
+    border-radius: var(--radius-full);
+    background: var(--border-strong);
+  }
+  .header { padding-top: var(--space-6); }
+}

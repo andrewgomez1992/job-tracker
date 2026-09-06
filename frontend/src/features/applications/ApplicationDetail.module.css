@@ -1,0 +1,120 @@
+.page {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.hero { display: flex; align-items: flex-start; gap: var(--space-4); min-width: 0; }
+.heroText { flex: 1 1 200px; min-width: 0; }
+.role {
+  display: block;
+  font-size: 1.5rem; font-weight: 660; letter-spacing: -0.03em; line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.company {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  margin-top: 4px; font-size: 0.9375rem; color: var(--text-muted);
+}
+.companyLink { color: var(--accent); }
+.companyLink:hover { text-decoration: underline; }
+.heroActions { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+
+.statusPicker {
+  height: 34px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--status-bg);
+  color: var(--status-fg);
+  font-size: 0.8438rem;
+  font-weight: 560;
+}
+
+/* Grid lines come from each cell's inset shadow, so empty trailing cells
+   stay surface-coloured instead of showing a grey void. */
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.fact { flex: 1 1 150px; padding: var(--space-4); box-shadow: inset -1px -1px 0 0 var(--border); }
+.factLabel {
+  font-size: 0.6875rem; font-weight: 620; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--text-subtle);
+}
+.factValue { margin-top: 5px; font-size: 0.9063rem; font-weight: 520; }
+.factMuted { color: var(--text-subtle); font-weight: 450; }
+
+.grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: var(--space-5); align-items: start; }
+@media (max-width: 1000px) { .grid { grid-template-columns: 1fr; } }
+
+.prose {
+  white-space: pre-wrap;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-height: 340px;
+  overflow-y: auto;
+}
+.proseFull { max-height: none; }
+
+.reminder { display: grid; gap: var(--space-3); grid-template-columns: minmax(0, 1fr); }
+.reminderDue {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.8438rem; font-weight: 550;
+}
+.overdue { color: var(--danger); }
+.soon { color: var(--warning); }
+
+.timeline { display: grid; gap: 0; padding: var(--space-5); grid-template-columns: minmax(0, 1fr); }
+.event { display: grid; grid-template-columns: 28px 1fr; gap: var(--space-3); position: relative; padding-bottom: var(--space-4); }
+.event:last-child { padding-bottom: 0; }
+.event:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 13px; top: 28px; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.eventDot {
+  z-index: 1;
+  display: grid; place-items: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  grid-template-columns: minmax(0, 1fr);
+}
+.eventBody { padding-top: 3px; min-width: 0; }
+.eventTitle { font-size: 0.875rem; line-height: 1.45; }
+.eventMeta { margin-top: 3px; font-size: 0.75rem; color: var(--text-subtle); }
+
+.composer { display: grid; gap: var(--space-2); padding: var(--space-4) var(--space-5); border-top: 1px solid var(--border); grid-template-columns: minmax(0, 1fr); }
+.composerRow { display: flex; justify-content: flex-end; }
+
+.itemList { display: grid; grid-template-columns: minmax(0, 1fr); }
+.item {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border);
+}
+.item:first-child { border-top: none; }
+.itemText { flex: 1; min-width: 0; }
+.itemTitle { font-size: 0.9063rem; font-weight: 550; }
+.itemMeta { margin-top: 3px; font-size: 0.8125rem; color: var(--text-muted); }
+.itemNotes { margin-top: var(--space-2); font-size: 0.8125rem; color: var(--text-muted); line-height: 1.55; white-space: pre-wrap; }
+.itemActions { display: flex; gap: 2px; flex: none; }
+.itemBadges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: var(--space-2); }
+
+.link { color: var(--accent); font-size: 0.8438rem; display: inline-flex; align-items: center; gap: 4px; }
+.link:hover { text-decoration: underline; }
+
+.tabsRow { position: sticky; top: var(--topbar-height); z-index: 20; background: var(--bg); padding: var(--space-2) 0; }
+@media (max-width: 899px) { .tabsRow { top: 0; } }
+
+.stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); align-content: start; }

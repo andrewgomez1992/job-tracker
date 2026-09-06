@@ -1,0 +1,22 @@
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--avatar-size, 34px);
+  height: var(--avatar-size, 34px);
+  border-radius: var(--radius-md);
+  font-size: calc(var(--avatar-size, 34px) * 0.36);
+  font-weight: 620;
+  letter-spacing: -0.02em;
+  background: hsl(var(--avatar-hue) 62% 94%);
+  color: hsl(var(--avatar-hue) 58% 34%);
+  border: 1px solid hsl(var(--avatar-hue) 45% 87%);
+  user-select: none;
+  grid-template-columns: minmax(0, 1fr);
+}
+:global([data-theme='dark']) .avatar {
+  background: hsl(var(--avatar-hue) 40% 20%);
+  color: hsl(var(--avatar-hue) 68% 78%);
+  border-color: hsl(var(--avatar-hue) 35% 28%);
+}
+.round { border-radius: 50%; }

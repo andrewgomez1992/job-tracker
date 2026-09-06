@@ -1,0 +1,23 @@
+{
+  "name": "Trail — Job Tracker",
+  "short_name": "Trail",
+  "description": "A calm place to track every job application, interview and follow-up.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b0d11",
+  "theme_color": "#5a5ae0",
+  "categories": ["productivity", "business"],
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Today", "url": "/", "description": "Follow-ups due now" },
+    { "name": "Pipeline", "url": "/board", "description": "The kanban board" },
+    { "name": "Interviews", "url": "/interviews", "description": "Upcoming rounds" }
+  ]
+}
