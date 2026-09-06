@@ -37,7 +37,7 @@ worker keeps the shell working offline (data still needs the API).
 | `npm run start` | API only, production mode |
 | `npm run seed` | Wipe and reseed the sample data |
 | `npm run db:reset` | Delete the database file, migrate, reseed |
-| `npm run smoke` | 55-assertion end-to-end API test against a throwaway database |
+| `npm run smoke` | 54-assertion end-to-end API test against a throwaway database |
 
 ## How it's put together
 
