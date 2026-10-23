@@ -25,3 +25,6 @@
   width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border-strong);
   background: var(--surface); color: var(--text); font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.5; resize: vertical;
 }
+
+/* The page grid already spaces sections; drop the header's own margin so it matches. */
+.page > header { margin-bottom: 0; }

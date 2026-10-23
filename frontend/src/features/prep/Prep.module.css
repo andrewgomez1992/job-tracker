@@ -37,3 +37,6 @@
 .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: var(--space-2); }
 .tags span { padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.7rem; font-weight: 600; }
 .form { display: grid; gap: var(--space-3); }
+
+/* The page grid already spaces sections; drop the header's own margin so it matches. */
+.page > header { margin-bottom: 0; }

@@ -107,3 +107,6 @@
   transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
 }
 .doneBtn:hover { background: #10b981; border-color: #10b981; color: #fff; }
+
+/* The page grid already spaces sections; drop the header's own margin so it matches. */
+.page > header { margin-bottom: 0; }
