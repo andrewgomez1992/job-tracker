@@ -2,18 +2,20 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Activity, AlarmClock, Briefcase, CalendarClock, CheckCircle2, ChevronRight, Clock,
-  FileText, MessageSquare, Plus, Send, Sparkles, TrendingUp, UserPlus,
+  Check, FileText, MessageSquare, Plus, Send, Sparkles, TrendingUp, UserPlus,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { format } from 'date-fns';
-import { useActivities, useAnalytics, useReminders } from '../../api/queries.js';
+import { useActivities, useAnalytics, useReminders, useUpdateApplication } from '../../api/queries.js';
 import { ACTIVITY_META } from '../../lib/constants.js';
 import { formatDate, formatDateTime, formatDueLabel, formatRelative, pluralize } from '../../lib/format.js';
 import {
-  Avatar, Badge, Card, CardHeader, EmptyState, SkeletonStack,
+  Avatar, Badge, Card, CardHeader, EmptyState, SkeletonStack, useToast,
 } from '../../components/ui/index.js';
 import { PageHeader } from '../../components/layout/PageHeader.jsx';
 import { StatCard } from './StatCard.jsx';
+import { HypeBanner } from '../hype/HypeBanner.jsx';
+import { GoalCard } from './GoalCard.jsx';
 import styles from './Dashboard.module.css';
 
 const ACTIVITY_ICONS = {
@@ -57,6 +59,14 @@ export function DashboardPage() {
   const { data: reminders, isLoading: remindersLoading } = useReminders();
   const { data: analytics } = useAnalytics(12);
   const { data: activities = [] } = useActivities(12);
+  const update = useUpdateApplication();
+  const toast = useToast();
+  const markDone = async (application) => {
+    try {
+      const next = await update.mutateAsync({ id: application.id, nextAction: null, nextActionAt: null });
+      toast.success(`Done: ${application.company.name}`, next?.nextActionAt ? `Next up: ${next.nextAction}` : undefined);
+    } catch (error) { toast.error('Could not update', error.message); }
+  };
 
   const needsYou = useMemo(
     () => [...(reminders?.overdue ?? []), ...(reminders?.today ?? [])],
@@ -80,6 +90,10 @@ export function DashboardPage() {
             : 'Nothing overdue. Nice place to be.'
         }
       />
+
+      <HypeBanner />
+
+      <GoalCard />
 
       <div className={styles.stats}>
         <StatCard icon={Briefcase} label="Active" value={analytics?.totals.active ?? '—'} hint="in the pipeline" />
@@ -115,19 +129,21 @@ export function DashboardPage() {
                 {needsYou.map((application) => {
                   const overdue = new Date(application.nextActionAt) < new Date(new Date().setHours(0, 0, 0, 0));
                   return (
-                    <ApplicationRow
-                      key={application.id}
-                      application={application}
-                      onClick={() => navigate(`/applications/${application.id}`)}
-                      right={
-                        <>
+                    <div key={application.id} className={styles.rowWrap}>
+                      <ApplicationRow
+                        application={application}
+                        onClick={() => navigate(`/applications/${application.id}`)}
+                        right={
                           <span className={clsx(styles.rowMeta, overdue ? styles.overdue : styles.soon)}>
                             {formatDueLabel(application.nextActionAt)}
                           </span>
-                          <ChevronRight size={15} color="var(--text-subtle)" />
-                        </>
-                      }
-                    />
+                        }
+                      />
+                      <button type="button" className={styles.doneBtn} onClick={() => markDone(application)}
+                        aria-label={`Mark ${application.company.name} follow-up done`} title="Done">
+                        <Check size={15} />
+                      </button>
+                    </div>
                   );
                 })}
               </div>

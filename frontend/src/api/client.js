@@ -4,6 +4,18 @@
  */
 const BASE = '/api';
 
+/**
+ * Demo mode runs the whole backend inside the browser on sample data (see
+ * src/demo). On for builds with VITE_DEMO=1 (the Vercel deploy); locally you
+ * can try it by opening the app with ?browserDemo in the URL.
+ */
+export const BROWSER_DEMO = import.meta.env.VITE_DEMO === '1' || (() => {
+  try {
+    if (new URLSearchParams(window.location.search).has('browserDemo')) sessionStorage.setItem('trail.browserDemo', '1');
+    return sessionStorage.getItem('trail.browserDemo') === '1';
+  } catch { return false; }
+})();
+
 export class ApiError extends Error {
   constructor(message, { status, details } = {}) {
     super(message);
@@ -31,6 +43,10 @@ const buildQuery = (params) => {
 };
 
 async function request(method, path, { body, params, signal } = {}) {
+  if (BROWSER_DEMO) {
+    const { demoRequest } = await import('../demo/api.js');
+    return demoRequest(method, path, { body, params });
+  }
   const isFormData = body instanceof FormData;
 
   const response = await fetch(BASE + path + buildQuery(params), {

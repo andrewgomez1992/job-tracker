@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   Activity, AlarmClock, Archive, ArchiveRestore, Briefcase, CalendarClock,
-  CheckCircle2, ExternalLink, FileText, Mail, MessageSquare, Pencil, Phone,
+  Check, CheckCircle2, ExternalLink, FileText, Mail, MessageSquare, Pencil, Phone,
   Plus, Trash2, TrendingUp, UserPlus, Users,
 } from 'lucide-react';
 import clsx from 'clsx';
@@ -29,6 +29,10 @@ import { InterviewFormModal } from '../interviews/InterviewFormModal.jsx';
 import { ContactFormModal } from '../contacts/ContactFormModal.jsx';
 import { DocumentFormModal } from '../documents/DocumentFormModal.jsx';
 import styles from './ApplicationDetail.module.css';
+import { JobSummary } from './JobSummary.jsx';
+import { Outreach } from './Outreach.jsx';
+import { InterviewPrep } from './InterviewPrep.jsx';
+import { ResumeMatch } from './ResumeMatch.jsx';
 
 const ACTIVITY_ICONS = {
   created: Plus, status_change: TrendingUp, note: MessageSquare, reminder_set: AlarmClock,
@@ -128,6 +132,13 @@ export function ApplicationDetailPage() {
       setReminderOpen(false);
       toast.success('Follow-up saved');
     } catch (error) { toast.error('Could not save', error.message); }
+  };
+
+  const markReminderDone = async () => {
+    try {
+      const next = await update.mutateAsync({ id: application.id, nextAction: null, nextActionAt: null });
+      toast.success('Done', next?.nextActionAt ? `Next up: ${next.nextAction} (${formatDueLabel(next.nextActionAt)})` : undefined);
+    } catch (error) { toast.error('Could not update', error.message); }
   };
 
   const submitNote = async () => {
@@ -232,6 +243,38 @@ export function ApplicationDetailPage() {
 
           <div className={styles.grid}>
             <div className={styles.stack}>
+              {application.summary && (
+                <Card>
+                  <CardHeader title="Job summary" subtitle="What you need to know" />
+                  <CardBody>
+                    <JobSummary text={application.summary} />
+                  </CardBody>
+                </Card>
+              )}
+
+              {(application.jobDescription || application.summary) && (
+                <Card>
+                  <CardHeader title="Resume match" subtitle="How your resume lines up with this posting" />
+                  <CardBody>
+                    <ResumeMatch application={application} />
+                  </CardBody>
+                </Card>
+              )}
+
+              <Card>
+                <CardHeader title="Get a referral" subtitle={`Find people at ${application.company.name} and what to send them`} />
+                <CardBody>
+                  <Outreach application={application} />
+                </CardBody>
+              </Card>
+
+              <Card>
+                <CardHeader title="Interview prep" subtitle="Likely questions, matched to your stories" />
+                <CardBody>
+                  <InterviewPrep application={application} />
+                </CardBody>
+              </Card>
+
               {application.jobDescription && (
                 <Card>
                   <CardHeader
@@ -267,6 +310,10 @@ export function ApplicationDetailPage() {
                 <CardHeader
                   title="Follow-up"
                   actions={
+                    <>
+                    {application.nextActionAt && (
+                      <Button size="sm" variant="primary" icon={Check} onClick={markReminderDone}>Done</Button>
+                    )}
                     <Button
                       size="sm"
                       onClick={() => {
@@ -279,6 +326,7 @@ export function ApplicationDetailPage() {
                     >
                       {application.nextActionAt ? 'Change' : 'Set'}
                     </Button>
+                    </>
                   }
                 />
                 <CardBody>

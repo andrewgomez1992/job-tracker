@@ -11,6 +11,8 @@ import { contactRoutes } from './modules/contacts/routes.js';
 import { documentRoutes } from './modules/documents/routes.js';
 import { interviewRoutes } from './modules/interviews/routes.js';
 import { reminderRoutes } from './modules/reminders/routes.js';
+import { storyRoutes } from './modules/stories/routes.js';
+import { env } from './config/env.js';
 
 export const apiRouter = Router();
 
@@ -21,6 +23,7 @@ apiRouter.get('/health', (_req, res) =>
 apiRouter.get('/meta', (_req, res) =>
   res.json({
     data: {
+      demo: env.demoMode,
       applicationStatuses: APPLICATION_STATUSES,
       workModes: WORK_MODES,
       employmentTypes: EMPLOYMENT_TYPES,
@@ -39,3 +42,4 @@ apiRouter.use('/documents', documentRoutes);
 apiRouter.use('/activities', activityRoutes);
 apiRouter.use('/analytics', analyticsRoutes);
 apiRouter.use('/reminders', reminderRoutes);
+apiRouter.use('/stories', storyRoutes);

@@ -97,3 +97,13 @@
 .date { font-size: 0.875rem; color: var(--text-muted); }
 
 .stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); align-content: start; }
+
+.rowWrap { display: flex; align-items: center; border-top: 1px solid var(--border); padding-right: var(--space-4); }
+.rowWrap:first-child { border-top: none; }
+.rowWrap .row { border-top: none; flex: 1; min-width: 0; }
+.doneBtn {
+  flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 999px;
+  border: 1px solid var(--border-strong); background: var(--surface); color: var(--text-muted); cursor: pointer;
+  transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+.doneBtn:hover { background: #10b981; border-color: #10b981; color: #fff; }

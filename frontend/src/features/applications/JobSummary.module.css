@@ -1,0 +1,10 @@
+.summary { display: grid; gap: var(--space-2); font-size: 0.875rem; line-height: 1.6; color: var(--text); }
+.heading {
+  margin: var(--space-2) 0 0;
+  font-size: 0.6875rem; font-weight: 650; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--accent);
+}
+.heading:first-child { margin-top: 0; }
+.text { margin: 0; color: var(--text-muted); }
+.list { margin: 0; padding-left: 1.1rem; display: grid; gap: 4px; list-style: disc; }
+.list li::marker { color: var(--text-subtle); }

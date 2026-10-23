@@ -17,7 +17,7 @@ import styles from './ApplicationFormModal.module.css';
 const emptyForm = {
   companyName: '', role: '', status: 'saved', priority: 2, source: '', location: '',
   workMode: '', employmentType: '', salaryMin: '', salaryMax: '', jobUrl: '',
-  appliedAt: '', nextAction: '', nextActionAt: '', jobDescription: '', notes: '',
+  appliedAt: '', nextAction: '', nextActionAt: '', jobDescription: '', summary: '', notes: '',
 };
 
 const toForm = (application) => (application ? {
@@ -36,11 +36,12 @@ const toForm = (application) => (application ? {
   nextAction: application.nextAction ?? '',
   nextActionAt: toLocalInputValue(application.nextActionAt),
   jobDescription: application.jobDescription ?? '',
+  summary: application.summary ?? '',
   notes: application.notes ?? '',
 } : emptyForm);
 
 /** One modal for both creating and editing - the only difference is the payload. */
-export function ApplicationFormModal({ open, onClose, application, defaultStatus }) {
+export function ApplicationFormModal({ open, onClose, application, defaultStatus, initialValues }) {
   const isEdit = Boolean(application);
   const toast = useToast();
   const create = useCreateApplication();
@@ -54,11 +55,15 @@ export function ApplicationFormModal({ open, onClose, application, defaultStatus
 
   useEffect(() => {
     if (!open) return;
-    setForm({ ...toForm(application), ...(defaultStatus && !application ? { status: defaultStatus } : {}) });
-    setShowDetails(Boolean(application));
+    setForm({
+      ...toForm(application),
+      ...(defaultStatus && !application ? { status: defaultStatus } : {}),
+      ...(initialValues && !application ? initialValues : {}),
+    });
+    setShowDetails(Boolean(application || initialValues));
     setErrors({});
     setFormError(null);
-  }, [open, application, defaultStatus]);
+  }, [open, application, defaultStatus, initialValues]);
 
   const set = (key) => (event) => {
     const value = event?.target ? event.target.value : event;
@@ -95,6 +100,7 @@ export function ApplicationFormModal({ open, onClose, application, defaultStatus
       nextAction: form.nextAction || null,
       nextActionAt: fromInputValue(form.nextActionAt),
       jobDescription: form.jobDescription || null,
+      summary: form.summary || null,
       notes: form.notes || null,
     };
 
@@ -103,8 +109,10 @@ export function ApplicationFormModal({ open, onClose, application, defaultStatus
         await update.mutateAsync({ id: application.id, ...payload });
         toast.success('Saved', `${payload.role} at ${payload.companyName}`);
       } else {
-        await create.mutateAsync(payload);
+        const created = await create.mutateAsync(payload);
         toast.success('Added', `${payload.role} at ${payload.companyName}`);
+        onClose(created);
+        return undefined;
       }
       onClose();
     } catch (error) {
@@ -227,6 +235,12 @@ export function ApplicationFormModal({ open, onClose, application, defaultStatus
               <Input label="Next action" optional value={form.nextAction} onChange={set('nextAction')} placeholder="Follow up with the recruiter" />
               <Input label="Remind me on" optional type="datetime-local" value={form.nextActionAt} onChange={set('nextActionAt')} />
             </FieldRow>
+
+            <Textarea
+              label="Job summary" optional value={form.summary} onChange={set('summary')}
+              hint="The good stuff at a glance. Use '## Heading' and '- bullet' lines."
+              placeholder={"## The role\n- …\n## Must-haves\n- …\n## Your angle\n- …"}
+            />
 
             <Textarea
               label="Job description" optional value={form.jobDescription} onChange={set('jobDescription')}

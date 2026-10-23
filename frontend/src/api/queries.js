@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useHype } from '../features/hype/HypeProvider.jsx';
 import { api } from './client.js';
 
 /**
@@ -17,6 +18,8 @@ export const keys = {
   activities: (limit) => ['activities', limit ?? 30],
   reminders: ['reminders'],
   analytics: (weeks) => ['analytics', weeks ?? 12],
+  daily: ['analytics', 'daily'],
+  stories: ['stories'],
 };
 
 /** Anything that can change a pipeline number invalidates these. */
@@ -69,22 +72,68 @@ export const useReminders = () =>
 export const useAnalytics = (weeks = 12) =>
   useQuery({ queryKey: keys.analytics(weeks), queryFn: () => api.get('/analytics/overview', { params: { weeks } }) });
 
+export const useDaily = () =>
+  useQuery({ queryKey: keys.daily, queryFn: () => api.get('/analytics/daily', { params: { days: 60 } }) });
+
+export const useStories = () =>
+  useQuery({ queryKey: keys.stories, queryFn: () => api.get('/stories') });
+
 /* ----------------------------------------------------------------- writes */
 
+export function useSaveStory() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, ...body }) => (id ? api.patch(`/stories/${id}`, body) : api.post('/stories', body)),
+    onSuccess: () => client.invalidateQueries({ queryKey: keys.stories }),
+  });
+}
+
+export function useDeleteStory() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: (id) => api.delete(`/stories/${id}`),
+    onSuccess: () => client.invalidateQueries({ queryKey: keys.stories }),
+  });
+}
+
+
+const HYPE_STATUS = new Set(['screening', 'interviewing', 'offer']);
+
 export function useCreateApplication() {
+  const client = useQueryClient();
+  const hype = useHype();
   const invalidate = useInvalidator();
   return useMutation({
     mutationFn: (body) => api.post('/applications', body),
-    onSuccess: () => invalidate([keys.companies()]),
+    onSuccess: (data) => {
+      // Saved-for-later jobs don't count; anything already applied does.
+      if (data?.status && data.status !== 'saved') {
+        const applied = client.getQueryData(keys.analytics(12))?.totals?.applied;
+        const today = client.getQueryData(keys.daily)?.today;
+        let goal = 20;
+        try { goal = Number(JSON.parse(localStorage.getItem('trail.goal'))) || 20; } catch { /* default */ }
+        hype.fire(HYPE_STATUS.has(data.status) ? data.status : 'applied', {
+          count: applied != null ? applied + 1 : undefined,
+          goalHit: today != null && today + 1 === goal ? goal : undefined,
+        });
+      }
+      invalidate([keys.companies()]);
+    },
   });
 }
 
 export function useUpdateApplication() {
   const client = useQueryClient();
+  const hype = useHype();
   const invalidate = useInvalidator();
   return useMutation({
     mutationFn: ({ id, ...body }) => api.patch(`/applications/${id}`, body),
     onSuccess: (data) => {
+      const before = client.getQueryData(keys.application(data.id))?.status;
+      if (before && before !== data.status) {
+        if (HYPE_STATUS.has(data.status)) hype.fire(data.status);
+        else if (before === 'saved' && data.status === 'applied') hype.fire('applied');
+      }
       client.setQueryData(keys.application(data.id), data);
       invalidate([keys.timeline(data.id), keys.companies()]);
     },
@@ -102,12 +151,19 @@ export function useDeleteApplication() {
 /** Board drag and drop. Optimistic, because a card must never lag the finger. */
 export function useReorderBoard() {
   const client = useQueryClient();
+  const hype = useHype();
   const invalidate = useInvalidator();
   return useMutation({
     mutationFn: (body) => api.post('/applications/reorder', body),
     onMutate: async (variables) => {
       await client.cancelQueries({ queryKey: keys.board });
       const previous = client.getQueryData(keys.board);
+      // A card that wasn't already in this column was just moved into it.
+      const had = new Set((previous?.[variables.status] ?? []).map((a) => a.id));
+      if (previous && variables.orderedIds?.some((id) => !had.has(id))) {
+        if (HYPE_STATUS.has(variables.status)) hype.fire(variables.status);
+        else if (variables.status === 'applied') hype.fire('applied');
+      }
       if (variables.optimisticBoard) client.setQueryData(keys.board, variables.optimisticBoard);
       return { previous };
     },

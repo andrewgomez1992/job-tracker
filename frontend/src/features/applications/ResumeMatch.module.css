@@ -1,0 +1,20 @@
+.wrap { display: grid; gap: var(--space-4); font-size: 0.875rem; }
+.empty { margin: 0; color: var(--text-muted); font-size: 0.875rem; }
+.head { display: flex; align-items: center; gap: var(--space-4); }
+.ring {
+  --c: #ef4444;
+  position: relative; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%;
+  background: conic-gradient(var(--c) var(--p), var(--surface-sunken) 0);
+}
+.ring::before { content: ''; position: absolute; inset: 7px; border-radius: 50%; background: var(--surface); }
+.ring span { position: relative; font-size: 1.15rem; font-weight: 750; font-variant-numeric: tabular-nums; }
+.good { --c: #10b981; }
+.ok { --c: #f59e0b; }
+.verdict { font-weight: 650; font-size: 1rem; }
+.sub { font-size: 0.78rem; color: var(--text-subtle); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { padding: 3px 9px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.have { background: rgba(16, 185, 129, 0.13); color: #10b981; }
+.miss { background: rgba(239, 68, 68, 0.11); color: #ef4444; }
+.tips { margin: 0; padding-left: 1.1rem; display: grid; gap: 6px; color: var(--text-muted); line-height: 1.5; list-style: disc; }
+.edit { font-size: 0.8rem; font-weight: 600; color: var(--accent); text-decoration: none; }

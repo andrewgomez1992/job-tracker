@@ -34,6 +34,7 @@ export const applicationCreateSchema = z
     salaryMax: money,
     salaryCurrency: z.string().trim().length(3).default('USD'),
     jobDescription: text(50_000),
+    summary: text(20_000),
     notes: text(20_000),
     appliedAt: isoDate,
     nextAction: text(300),
@@ -64,6 +65,7 @@ export const applicationUpdateSchema = z
     salaryMax: money,
     salaryCurrency: z.string().trim().length(3).optional(),
     jobDescription: text(50_000),
+    summary: text(20_000),
     notes: text(20_000),
     appliedAt: isoDate,
     nextAction: text(300),
@@ -95,7 +97,7 @@ export const applicationListQuery = z.object({
     .transform((v) => (v === 'all' ? null : v === 'true')),
   sort: z.enum(['updated', 'created', 'applied', 'company', 'role', 'priority', 'next_action']).default('updated'),
   direction: z.enum(['asc', 'desc']).default('desc'),
-  limit: z.coerce.number().int().min(1).max(500).default(200),
+  limit: z.coerce.number().int().min(1).max(5000).default(200),
 });
 
 export const reorderSchema = z.object({

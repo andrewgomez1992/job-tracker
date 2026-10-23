@@ -7,6 +7,8 @@ import { useIsMobile } from '../../hooks/useMediaQuery.js';
 import { useHotkey } from '../../hooks/useHotkey.js';
 import { Button, IconButton, Modal } from '../ui/index.js';
 import { ThemeToggle } from './ThemeToggle.jsx';
+import { HypeToggle } from '../../features/hype/HypeToggle.jsx';
+import { DemoBanner } from '../../demo/DemoBanner.jsx';
 import { CommandPalette } from './CommandPalette.jsx';
 import { ApplicationFormModal } from '../../features/applications/ApplicationFormModal.jsx';
 import { NAV_ITEMS, MOBILE_PRIMARY, MOBILE_SECONDARY } from './navigation.js';
@@ -74,16 +76,22 @@ export function AppShell() {
               <span className={styles.themeLabel}>Appearance</span>
               <ThemeToggle />
             </div>
+            <div className={styles.themeRow}>
+              <span className={styles.themeLabel}>Hype</span>
+              <HypeToggle />
+            </div>
           </div>
         </aside>
       )}
 
       <div className={styles.main}>
+        <DemoBanner />
         {isMobile ? (
           <header className={styles.mobileTopbar}>
             <h1 className={styles.mobileTitle}>{pageTitle}</h1>
             <div className={styles.topbarSpacer} />
             <IconButton label="Search" icon={Search} onClick={() => setPaletteOpen(true)} />
+            <HypeToggle />
             <ThemeToggle />
           </header>
         ) : (

@@ -6,6 +6,7 @@ import { activityService } from '../activities/service.js';
 import { companyService } from '../companies/service.js';
 import { applicationRepository } from './repository.js';
 import { serializeApplication, toApplicationRow } from './mapper.js';
+import { applyAutoFollowups } from './followups.js';
 
 const STATUS_LABELS = {
   saved: 'Saved',
@@ -50,6 +51,7 @@ export const applicationService = {
 
       // Applying is a dated event; remember when, even if you forgot to say.
       if (row.status !== 'saved' && !row.applied_at) row.applied_at = nowIso();
+      applyAutoFollowups(row);
 
       const created = applicationRepository.create(row);
       activityService.record({
@@ -82,6 +84,7 @@ export const applicationService = {
         }
       }
 
+      applyAutoFollowups(row, current);
       const updated = applicationRepository.update(id, row);
 
       if (row.status && row.status !== current.status) {
@@ -120,9 +123,11 @@ export const applicationService = {
       applicationRepository.reorder(status, orderedIds);
 
       for (const row of moved) {
-        if (status !== 'saved' && !row.applied_at) {
-          applicationRepository.update(row.id, { applied_at: nowIso() });
-        }
+        const patch = { status };
+        if (status !== 'saved' && !row.applied_at) patch.applied_at = nowIso();
+        applyAutoFollowups(patch, row);
+        delete patch.status;
+        if (Object.keys(patch).length) applicationRepository.update(row.id, patch);
         activityService.record({
           applicationId: row.id,
           type: 'status_change',

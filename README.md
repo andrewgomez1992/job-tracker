@@ -126,3 +126,19 @@ there is already the default, so the app runs with no `.env` at all.
 ## Keyboard
 
 `⌘K` opens search. `N` adds an application. `Esc` closes anything open.
+
+## Demo mode and deploying a public demo
+
+Trail runs in one of three ways:
+
+| Mode | How to turn it on | Data |
+| --- | --- | --- |
+| **Your real tracker** (default) | `npm run dev` | `backend/data/job-tracker.db` on your machine |
+| **Local demo** (for screenshots) | Set `USE_DEMO_DATA = true` in `backend/src/config/demo.js` | `backend/data/demo.db`, fake sample data, auto-seeded |
+| **Browser demo** (the Vercel deploy) | Build with `VITE_DEMO=1`, or open `http://localhost:5173/?browserDemo` | The real backend code running in the browser on SQLite (WebAssembly). Changes stay in the visitor's browser. |
+
+The demo databases are separate files, so switching modes never touches your real data.
+`npm run seed` rebuilds `demo.db` only.
+
+**Vercel:** Root Directory `frontend`, framework preset Vite, environment variable `VITE_DEMO=1`.
+`frontend/vercel.json` handles client-side routes.

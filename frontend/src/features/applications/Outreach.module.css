@@ -1,0 +1,37 @@
+.wrap { display: grid; gap: var(--space-5); font-size: 0.875rem; }
+.label { font-size: 0.6875rem; font-weight: 650; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); margin-bottom: var(--space-2); }
+.searches { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--space-2); }
+.search {
+  display: flex; align-items: center; gap: 8px; padding: 9px 11px;
+  border: 1px solid var(--border); border-radius: 10px; background: var(--surface-2);
+  color: var(--text); text-decoration: none; transition: background 0.15s, border-color 0.15s;
+}
+.search:hover { background: var(--accent-soft); border-color: var(--accent-ring); }
+.searchIcon { flex: none; color: var(--text-subtle); }
+.searchText { flex: 1; min-width: 0; display: grid; }
+.searchLabel { font-weight: 600; }
+.searchHint { font-size: 0.75rem; color: var(--text-subtle); }
+.tip { margin: var(--space-2) 0 0; font-size: 0.8125rem; color: var(--text-muted); line-height: 1.5; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tab {
+  padding: 5px 10px; border-radius: 999px; border: 1px solid var(--border-strong);
+  background: var(--surface); color: var(--text-muted); font: inherit; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+}
+.tabActive { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.who { margin: var(--space-2) 0; font-size: 0.78rem; color: var(--text-subtle); }
+.name {
+  width: 100%; max-width: 240px; padding: 7px 10px; margin-bottom: var(--space-2);
+  border: 1px solid var(--border-strong); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit;
+}
+.message {
+  margin: 0; padding: 12px 14px; border-radius: 10px; background: var(--surface-sunken);
+  white-space: pre-wrap; word-wrap: break-word; font-family: var(--font-sans); font-size: 0.85rem; line-height: 1.55; color: var(--text);
+}
+.footer { display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-2); }
+.count { font-size: 0.75rem; color: var(--text-subtle); font-variant-numeric: tabular-nums; }
+.countOver { color: #ef4444; font-weight: 650; }
+.copy {
+  display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 8px; border: 0;
+  background: var(--accent); color: var(--accent-fg); font: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+}

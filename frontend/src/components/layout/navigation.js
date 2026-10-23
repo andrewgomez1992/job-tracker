@@ -1,5 +1,5 @@
 import {
-  BarChart3, Briefcase, CalendarClock, FileText, Kanban, Sun, Users,
+  BarChart3, Briefcase, CalendarClock, FileText, GraduationCap, Kanban, Sun, Users, Wrench,
 } from 'lucide-react';
 
 export const NAV_ITEMS = [
@@ -9,7 +9,9 @@ export const NAV_ITEMS = [
   { to: '/interviews', label: 'Interviews', icon: CalendarClock, title: 'Interviews' },
   { to: '/contacts', label: 'Contacts', icon: Users, title: 'Contacts' },
   { to: '/documents', label: 'Documents', icon: FileText, title: 'Documents' },
+  { to: '/prep', label: 'Prep', icon: GraduationCap, title: 'Interview prep' },
   { to: '/insights', label: 'Insights', icon: BarChart3, title: 'Insights' },
+  { to: '/tools', label: 'Tools', icon: Wrench, title: 'Tools' },
 ];
 
 /** The four that earn a slot in the phone tab bar. */

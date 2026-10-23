@@ -1,0 +1,17 @@
+.wrap { display: grid; gap: var(--space-4); font-size: 0.875rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; font-weight: 600; }
+.label { font-size: 0.6875rem; font-weight: 650; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); margin-bottom: var(--space-2); }
+.list { margin: 0; padding-left: 1.2rem; display: grid; gap: 8px; }
+.list li { line-height: 1.45; }
+.list li > span:first-child { display: block; }
+.story, .storyMissing {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 3px;
+  font-size: 0.75rem; font-weight: 600; text-decoration: none;
+}
+.story { color: #10b981; }
+.storyMissing { color: var(--text-subtle); }
+.tip { display: block; margin-top: 3px; font-size: 0.78rem; color: var(--text-subtle); }
+.skill { display: inline-block; margin-top: 3px; font-size: 0.7rem; color: var(--text-subtle); }
+.footer { display: flex; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
+.more { background: none; border: 0; padding: 0; font: inherit; font-size: 0.8rem; font-weight: 600; color: var(--accent); cursor: pointer; text-decoration: none; }

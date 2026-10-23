@@ -4,7 +4,7 @@ import { buildUpdate, likeTerm, withNulls } from '../../lib/sql.js';
 const COLUMNS = [
   'company_id', 'role', 'status', 'priority', 'source', 'job_url', 'location',
   'work_mode', 'employment_type', 'salary_min', 'salary_max', 'salary_currency',
-  'job_description', 'notes', 'applied_at', 'next_action', 'next_action_at',
+  'job_description', 'summary', 'notes', 'applied_at', 'next_action', 'next_action_at',
   'board_order', 'archived',
 ];
 
@@ -58,7 +58,8 @@ export const applicationRepository = {
     }
     if (filters.search) {
       where.push(`(a.role LIKE @search ESCAPE '\\' OR c.name LIKE @search ESCAPE '\\'
-                   OR a.location LIKE @search ESCAPE '\\' OR a.notes LIKE @search ESCAPE '\\')`);
+                   OR a.location LIKE @search ESCAPE '\\' OR a.notes LIKE @search ESCAPE '\\'
+                   OR a.summary LIKE @search ESCAPE '\\')`);
       params.search = likeTerm(filters.search);
     }
 
@@ -94,11 +95,11 @@ export const applicationRepository = {
         `INSERT INTO applications
            (company_id, role, status, priority, source, job_url, location, work_mode,
             employment_type, salary_min, salary_max, salary_currency, job_description,
-            notes, applied_at, next_action, next_action_at, board_order)
+            summary, notes, applied_at, next_action, next_action_at, board_order)
          VALUES
            (@company_id, @role, @status, @priority, @source, @job_url, @location, @work_mode,
             @employment_type, @salary_min, @salary_max, @salary_currency, @job_description,
-            @notes, @applied_at, @next_action, @next_action_at, @board_order)`,
+            @summary, @notes, @applied_at, @next_action, @next_action_at, @board_order)`,
       )
       .run({
         ...row,
