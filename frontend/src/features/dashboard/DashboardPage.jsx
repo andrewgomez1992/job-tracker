@@ -16,6 +16,7 @@ import { PageHeader } from '../../components/layout/PageHeader.jsx';
 import { StatCard } from './StatCard.jsx';
 import { HypeBanner } from '../hype/HypeBanner.jsx';
 import { GoalCard } from './GoalCard.jsx';
+import { ReadyToApply } from './ReadyToApply.jsx';
 import styles from './Dashboard.module.css';
 
 const ACTIVITY_ICONS = {
@@ -111,6 +112,8 @@ export function DashboardPage() {
 
       <div className={styles.columns}>
         <div className={styles.stack}>
+          <ReadyToApply />
+
           <Card>
             <CardHeader
               title="Needs you"

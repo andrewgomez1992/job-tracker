@@ -1,11 +1,12 @@
 import {
-  BarChart3, Briefcase, CalendarClock, FileText, GraduationCap, Kanban, Sun, Users, Wrench,
+  BarChart3, Briefcase, CalendarClock, FileText, GraduationCap, Kanban, Link2, Sun, Users, Wrench,
 } from 'lucide-react';
 
 export const NAV_ITEMS = [
   { to: '/', label: 'Today', icon: Sun, end: true, title: 'Today' },
   { to: '/board', label: 'Board', icon: Kanban, title: 'Pipeline' },
   { to: '/applications', label: 'Applications', icon: Briefcase, title: 'Applications' },
+  { to: '/links', label: 'My links', icon: Link2, title: 'My links' },
   { to: '/interviews', label: 'Interviews', icon: CalendarClock, title: 'Interviews' },
   { to: '/contacts', label: 'Contacts', icon: Users, title: 'Contacts' },
   { to: '/documents', label: 'Documents', icon: FileText, title: 'Documents' },

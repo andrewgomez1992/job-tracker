@@ -14,6 +14,7 @@ import { InterviewsPage } from './features/interviews/InterviewsPage.jsx';
 import { ContactsPage } from './features/contacts/ContactsPage.jsx';
 import { DocumentsPage } from './features/documents/DocumentsPage.jsx';
 import { PrepPage } from './features/prep/PrepPage.jsx';
+import { LinksPage } from './features/links/LinksPage.jsx';
 import { ToolsPage } from './features/tools/ToolsPage.jsx';
 import { SaveJobPage } from './features/tools/SaveJobPage.jsx';
 
@@ -47,6 +48,7 @@ export default function App() {
                 <Route path="interviews" element={<ErrorBoundary><InterviewsPage /></ErrorBoundary>} />
                 <Route path="contacts" element={<ErrorBoundary><ContactsPage /></ErrorBoundary>} />
                 <Route path="documents" element={<ErrorBoundary><DocumentsPage /></ErrorBoundary>} />
+                <Route path="links" element={<ErrorBoundary><LinksPage /></ErrorBoundary>} />
                 <Route path="prep" element={<ErrorBoundary><PrepPage /></ErrorBoundary>} />
                 <Route path="tools" element={<ErrorBoundary><ToolsPage /></ErrorBoundary>} />
                 <Route path="save" element={<ErrorBoundary><SaveJobPage /></ErrorBoundary>} />

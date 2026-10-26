@@ -110,3 +110,21 @@
 
 /* The page grid already spaces sections; drop the header's own margin so it matches. */
 .page > header { margin-bottom: 0; }
+
+/* Ready to apply */
+.applyLink, .appliedBtn {
+  flex: none; display: inline-flex; align-items: center; gap: 5px;
+  height: 30px; padding: 0 12px; margin-left: var(--space-2);
+  border-radius: 999px; font-size: 0.7813rem; font-weight: 560; white-space: nowrap;
+  text-decoration: none; cursor: pointer;
+  transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+.applyLink { border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); }
+.applyLink:hover { background: var(--surface-hover); }
+.appliedBtn { border: 1px solid #10b981; background: transparent; color: #0e9f6e; }
+.appliedBtn:hover { background: #10b981; color: #fff; }
+.appliedBtn:disabled { opacity: 0.6; cursor: default; }
+@media (max-width: 640px) {
+  .applyLink { padding: 0 9px; }
+  .appliedBtn { padding: 0 9px; }
+}
