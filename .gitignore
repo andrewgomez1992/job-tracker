@@ -10,3 +10,4 @@ dist/
 
 # local sync artefact
 .snapshot.tgz
+Claude outputs/

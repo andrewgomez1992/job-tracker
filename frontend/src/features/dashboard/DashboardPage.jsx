@@ -10,7 +10,7 @@ import { useActivities, useAnalytics, useReminders, useUpdateApplication } from 
 import { ACTIVITY_META } from '../../lib/constants.js';
 import { formatDate, formatDateTime, formatDueLabel, formatRelative, pluralize } from '../../lib/format.js';
 import {
-  Avatar, Badge, Card, CardHeader, EmptyState, SkeletonStack, useToast,
+  Avatar, Badge, Button, Card, CardHeader, EmptyState, SkeletonStack, useToast,
 } from '../../components/ui/index.js';
 import { PageHeader } from '../../components/layout/PageHeader.jsx';
 import { StatCard } from './StatCard.jsx';
@@ -118,7 +118,14 @@ export function DashboardPage() {
             <CardHeader
               title="Needs you"
               subtitle={needsYou.length ? 'Overdue and due today' : undefined}
-              actions={needsYou.length > 0 && <Badge tone="rejected">{needsYou.length}</Badge>}
+              actions={needsYou.length > 0 && (
+                <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Button variant="primary" size="sm" icon={Send} onClick={() => navigate('/reach-out')}>
+                    Start reach-outs
+                  </Button>
+                  <Badge tone="rejected">{needsYou.length}</Badge>
+                </span>
+              )}
             />
             {remindersLoading ? (
               <div style={{ padding: 'var(--space-5)' }}><SkeletonStack rows={2} height={44} /></div>

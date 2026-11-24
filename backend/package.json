@@ -8,7 +8,8 @@
     "migrate": "node -e \"import('./src/db/migrate.js').then(m=>m.runMigrations())\"",
     "seed": "TRAIL_DEMO=1 node src/db/seed.js",
     "db:reset": "node -e \"for (const f of ['data/demo.db','data/demo.db-wal','data/demo.db-shm']) require('fs').rmSync(f,{force:true})\" && npm run seed",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "check-links": "node scripts/check-links.mjs"
   },
   "keywords": [],
   "author": "",

@@ -17,6 +17,7 @@ import { PrepPage } from './features/prep/PrepPage.jsx';
 import { LinksPage } from './features/links/LinksPage.jsx';
 import { ToolsPage } from './features/tools/ToolsPage.jsx';
 import { SaveJobPage } from './features/tools/SaveJobPage.jsx';
+import { ReachOutPage } from './features/reachout/ReachOutPage.jsx';
 
 // Recharts is the heaviest dependency in the app and only Insights needs it.
 const InsightsPage = lazy(() =>
@@ -51,6 +52,7 @@ export default function App() {
                 <Route path="links" element={<ErrorBoundary><LinksPage /></ErrorBoundary>} />
                 <Route path="prep" element={<ErrorBoundary><PrepPage /></ErrorBoundary>} />
                 <Route path="tools" element={<ErrorBoundary><ToolsPage /></ErrorBoundary>} />
+                <Route path="reach-out" element={<ErrorBoundary><ReachOutPage /></ErrorBoundary>} />
                 <Route path="save" element={<ErrorBoundary><SaveJobPage /></ErrorBoundary>} />
                 <Route
                   path="insights"
