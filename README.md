@@ -1,10 +1,21 @@
 # Trail — a job tracker you'll actually use
 
-A private, single-user job application tracker. React + Vite on the front,
-Express 5 + SQLite on the back, no accounts, no cloud, no subscription. It runs
-on your machine and installs to your phone's home screen.
+### [▶ Try the live demo →](https://job-tracker-two-bay.vercel.app/)
 
-![stack](https://img.shields.io/badge/react-19-blue) ![stack](https://img.shields.io/badge/node-%3E%3D20-green) ![stack](https://img.shields.io/badge/sqlite-better--sqlite3-lightgrey)
+[![Trail](https://job-tracker-two-bay.vercel.app/og.png)](https://job-tracker-two-bay.vercel.app/)
+
+**The demo runs the real backend.** Express 5 and SQLite are compiled to
+WebAssembly and execute in your browser — the same route handlers, the same
+migrations, the same SQL — so the whole app is explorable with no server, no
+signup and no hosting cost. Changes stay in your tab.
+
+A private, single-user job application tracker: drag-and-drop pipeline,
+follow-up reminders, resume-to-posting match scoring, a STAR story bank, and a
+bookmarklet that saves a job from any site. React 19 + Vite on the front,
+Express 5 + SQLite on the back. Run it locally and it installs to your phone's
+home screen.
+
+![stack](https://img.shields.io/badge/react-19-blue) ![stack](https://img.shields.io/badge/node-%3E%3D20-green) ![stack](https://img.shields.io/badge/sqlite-better--sqlite3-lightgrey) ![stack](https://img.shields.io/badge/tests-54%20e2e-success)
 
 ## Getting started
 
