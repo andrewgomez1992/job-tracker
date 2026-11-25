@@ -15,6 +15,7 @@
     "start": "npm --prefix backend start",
     "seed": "npm --prefix backend run seed",
     "smoke": "npm --prefix backend run smoke",
+  "check-links": "npm --prefix backend run check-links",
     "db:reset": "npm --prefix backend run db:reset"
   },
   "devDependencies": {
